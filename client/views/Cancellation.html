@@ -1,0 +1,50 @@
+<style>
+td{
+  color:white;
+}
+
+</style>
+
+<button class="btn btn-info btn-block"><h4>CANCELLATION</h4></button>
+
+<div>
+  <table class="table">
+<tr>
+  <td>BOOKING ID</td>
+  <td><input type="text" class="form-control" style="width: 27%;" ng-model="idNo"></td>
+
+  </tr>
+  <tr>
+    <td>MOBILE NO</td>
+    <td><input type="ph" class="form-control" style="width: 27%;" ng-model="phone"></td>
+  </tr>
+  <tr>
+    <td>
+    </td>
+    <td>
+      <button type="button" style="padding: 6px 32px;" ng-click="showdetails()" class="btn btn-danger">CHECK DETAILS</button>
+    </td>
+
+  </tr>
+
+ </table>
+
+<div ng-show="showd" style="background-color: white;margin-left:28%;padding: 21px;width:26%">
+
+
+  <b>User Name:</b>{{cancellist.Cname}}<br>
+<b>Email ID:</b>{{cancellist.Mail}}<br>
+<b>Source:</b>{{cancellist.CsourceLoc}}<br>
+<b>Destination:</b>{{cancellist.CDesinationLoc}}<br>
+
+<b>Pickup Date:</b>{{cancellist.CPickdate}}<br>
+<b>Pickup Time:</b>{{cancellist.CPickTime}}<br>
+<b>Amount:</b>{{cancellist.CAmount}}<br>
+
+  <button type="button" style="padding:10px"ng-click="cancelBook(cancellist)" class="btn btn-danger">CHECK DETAILS</button>
+
+</div>
+
+
+
+</div>

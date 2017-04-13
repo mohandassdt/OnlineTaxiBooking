@@ -1,0 +1,87 @@
+<div class="container" style="overflow:hidden;">
+  <button class="btn btn-info btn-block" style="width: 63%;">CONFIRMATION PAGE</button>
+
+<div class="table-responsive">
+  <table class="table" style="color:white;background-color: TRANSPARENT;width: 63%;">
+    <tr>
+      <td style="padding: 0px;"><b>BOOKING ID</b></td>
+      <td style="padding: 0px;">
+      <p>{{cnf.id}}</p>
+    </td>
+    </tr>
+
+  <tr>
+    <td style="padding: 0px;"><b>Source</b></td>
+    <td style="padding: 0px;">
+    <p>{{cnf.sourceLoc}}</p>
+</td>
+</tr>
+<tr>
+  <td style="padding: 0px;"><b>Destination</b></td>
+  <td style="padding: 0px;">
+  <p>{{cnf.DesinationLoc}}</p>
+</td>
+</tr>
+<tr>
+  <td style="padding: 0px;"><b>Type</b></td>
+  <td style="padding: 0px;">
+  <p>{{cnf.Type}}</p>
+</td>
+</tr>
+<tr>
+  <td style="padding: 0px;"><b>TotalAmount</b></td>
+  <td style="padding: 0px;">
+  <p> <i class="fa fa-inr"></i>{{cnf.amount}}</p>
+</td>
+</tr>
+<tr>
+  <td style="padding: 0px;"><b>Pickup LandMar1</b></td>
+  <td style="padding: 0px;">
+  <p>{{cnf.Landmark1}}</p>
+</td>
+</tr>
+
+<tr>
+  <td style="padding: 0px;"><b>Pickup LandMar2</b></td>
+  <td style="padding: 0px;">
+  <p>{{cnf.Landmark2}}</p>
+</td>
+</tr>
+
+<tr>
+  <td style="padding: 0px;"><b>Pickup Date</b></td>
+  <td style="padding: 0px;">
+  <p>{{cnf.Pickdate}}</p>
+</td>
+</tr>
+
+<tr>
+  <td style="padding: 0px;"><b>Pickup Time</b></td>
+  <td style="padding: 0px;">
+  <p>{{cnf.PickTime}}</p>
+</td>
+
+
+</tr>
+</table>
+<div class="col-md-7">
+<form class="form" name="myForm" ng-submit="ConfirmBook(cndetaillist)" style="color:white;background-color: TRANSPARENT;width: 63%;">
+  <label><b>User Name</b></label>
+
+  <input class="form-control" type="text" ng-model="cndetail.Cname" required>
+
+  <label><b>Mail ID</b></label>
+  <td>
+  <input class="form-control" type="email" ng-model="cndetail.Mail" required>
+
+  <label><b>Mobile No</b></label>
+
+  <input class="form-control" ng-model="cndetail.Mobile" minlength="10" type="text" required>
+
+
+<button type="submit" ng-disabled="myForm.$invalid" class="btn btn-success">CONFIRM</button>
+</form>
+
+
+</div>
+</div>

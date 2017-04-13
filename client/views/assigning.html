@@ -1,0 +1,23 @@
+<div style="color:white">
+<b>CustomerBookingID</b>{{asDriver.customerId}}<br>
+<b>Source</b>{{asDriver.sourcePlace}}<br>
+<b>Destination</b>{{asDriver.DesinationPlace}}<br>
+<b>Picup Date</b>{{asDriver.pickdate}}<br>
+<b>Picup Time</b>{{asDriver.pickTime}}<br>
+<b>Car Type</b>{{asDriver.crType}}<br>
+
+  <button type="button" ng-click="selectDriver()" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalDriver">Select driver</button>
+
+  <div class="modal fade" id="myModalDriver" role="dialog">
+     <div class="modal-dialog modal-sm">
+       <div class="modal-content">
+         <h3 style="color:blue">Select Driver</h3>
+<select  class="form-control" ng-model="assignD.dId" style="width: 100%;" required>
+
+         <option style="text align:cenetr;color:#999;" disabled selected >SelectID</option>
+       <option  ng-repeat="t in driveid" value="{{t}}">{{t}}</option>
+
+   </select>
+     <button type="button" class="btn btn-default" style="margin-left: 32%;" ng-click="addAssign(assignD)" data-dismiss="modal">Close</button></div></div></div>
+
+</div>

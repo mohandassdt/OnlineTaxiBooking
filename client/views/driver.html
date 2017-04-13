@@ -1,0 +1,190 @@
+<style>
+
+* {
+  margin: 0;
+  padding: 0;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  padding: 20px;
+
+}
+h1 {
+  font-weight: normal;
+  font-size: 40px;
+  margin: 20px 0 100px 10px;
+}
+.tabs {
+  width: 650px;
+  float: none;
+  list-style: none;
+  position: relative;
+  margin: 80px 0 0 10px;
+}
+.tabs li {
+  float: left;
+  display: block;
+}
+.tabs input[type="radio"] {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+.tabs label {
+  display: block;
+  padding: 14px 21px;
+  border-radius: 2px 2px 0 0;
+  font-size: 20px;
+  background: #ccc;
+  cursor: pointer;
+  position: relative;
+  top: 4px;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.tabs [id^="tab"]:checked + p {
+    color:black;
+    -moz-transition: all 2.2s ease-in-out;
+    -o-transition: all 2.2s ease-in-out;
+    -webkit-transition: all 2.2s ease-in-out;
+    transition: all 2.2s ease-in-out;
+}
+.tabs label:hover {
+  background: #fff;
+}
+.tabs .tab-content {
+  z-index: 2;
+  display: none;
+  overflow: hidden;
+  width: 407px;
+  font-size: 14px;
+  line-height:17px;
+  padding: 15px;
+  position: absolute;
+  top: 53px;
+  left: 0;
+  background: #fff;
+}
+.tabs [id^="tab"]:checked + label {
+  background: #fff;
+}
+.tabs [id^="tab"]:checked ~ [id^="tab-content"] {
+  display: block;
+}
+
+</style>
+
+
+<div>
+
+<div>
+<label style="color:white">Enter Your ID:</label>
+<input type="text" ng-model="driverDetail">
+
+<button ng-click="viewDetails()">Done</button>
+
+</div>
+
+
+<div class="container">
+  <div ng-show="logDriver">
+	<div class="row">
+
+        <ul class=tabs>
+
+            <li>
+
+                <input type=radio name=tabs id=tab1 checked>
+                <label for=tab1>CUSTOMER DETAILS</label>
+                <div id=tab-content1 class=tab-content>
+<div ng-repeat="as in CustomerDe">
+  <table>
+<tr><th>BookingID</th><td>  {{as.customerId}}</td></tr>
+<tr><th>Name</th><td>  {{as.name}}</td></tr>
+<tr><th>MobileNo</th><td>  {{as.mobile}}</td></tr>
+<tr><th>Source</th><td>  {{as.sourcePlace}}</td></tr>
+<tr><th>Destination</th><td>  {{as.DesinationPlace}}</td></tr>
+<tr><th>LandMark1</th><td>  {{as.Landmark1}}</td></tr>
+<tr><th>LandMark2</th><td>  {{as.Landmark2}}</td></tr>
+<tr><th>PickDate</th><td>  {{as.pickdate}}</td></tr>
+<tr><th>PIckTime</th><td>  {{as.pickTime}}</td></tr>
+</table></div>
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalBill">Generate Bill</button>
+
+</div>
+
+
+            </li>
+
+            <li>
+
+                <input type=radio name=tabs id=tab2 checked>
+                <label for=tab2>MY DETAILS</label>
+                <div id=tab-content2 class=tab-content>
+
+
+        <div ng-repeat="d in DriverDe">
+                    <b>Name</b> <p>{{d.name}}</p>
+                    <b>Driver ID</b> <p>{{d.Did}}</p>
+                    <b>Age</b> <p>{{d.age}}</p>
+                        <b>Mobile no</b> <p>{{d.Mobile}}</p>
+                            <b>Licence No</b> <p>{{d.licence}}</p>
+                                <b>Car Type</b> <p>{{d.drtype}}</p>
+                                    <b>Car Name</b> <p>{{d.Car}}</p>
+                                        <b>Car No</b> <p>{{d.carNo}}</p>
+
+                </div>
+
+            </li>
+
+        </ul>
+
+        <br style=clear:both;>
+	</div>
+</div>
+
+</div>
+<div class="modal fade" id="myModalBill" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Bill</h4>
+      </div>
+      <div class="modal-body">
+        <div ng-repeat="as in CustomerDe">
+
+        <table>
+          <tr><th>DriverID</th><td>  <p id="didn">{{as.dId}}</p></td></tr>
+        <tr><th>BookingID</th><td> <p  id="cdi"> {{as.customerId}}</p></td></tr>
+        <tr><th>Name</th><td> <p id="name"> {{as.name}}</p></td></tr>
+        <tr><th>MobileNo</th><td> <p id="mblno"> {{as.mobile}}</p></td></tr>
+        <tr><th>Source</th><td><p  id="srce">  {{as.sourcePlace}}</p></td></tr>
+        <tr><th>Destination</th><td> <p  id="dest"> {{as.DesinationPlace}}</p></td></tr>
+        <tr><th>Date</th><td> <p  id="dy"> {{as.pickdate}}</p></td></tr>
+        <tr><th>Date</th><td> <p  id="tme"> {{as.pickTime}}</p></td></tr>
+
+
+      </table>
+      </div>
+      <div ng-repeat="t in typeDe">
+        <table>
+          <tr><th>Car Type</th><td> <p> {{t.CrTp}}</p></td></tr>
+        <tr><th>Base Fare</th><td> <p> {{t.Amount}}</p> .Rs</td></tr>
+        <tr><th>Offer Kmts</th><td> <p> {{t.Free}}</p>.KM </td></tr>
+        <tr><th>Amount Till off.Kmts</th><td> <p> {{t.till}} </p>.Rs</td></tr>
+        <tr><th>Amount after off.Kmts</th><td>  <p>{{t.after}}</p> .Rs</td></tr>
+        </table>
+        <div>
+          <div ng-repeat="as in CustomerDe"><table><td>TotalAmount</td><td><p id="amnt">{{as.amount}}</p> .Rs</td></table></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="addBill()"  data-dismiss="modal">Confirm</button>
+      </div>
+    </div>
+  </div>
+    </div></div>
+</div>
