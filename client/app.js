@@ -6,12 +6,10 @@ app.config(function($routeProvider, $locationProvider) {
     }).when('/Login', {
         templateUrl: 'views/Login.html',
         controller: 'LoginController'
-      }).when('/DriverLogin', {
-          templateUrl: 'views/DriverLogin.html',
-          controller: 'DriverLoginController'
+
     }).when('/Register', {
         templateUrl: 'views/Register.html',
-        // controller: 'RegisterController'
+        controller: 'RegisterController'
       }).when('/book', {
           templateUrl: 'views/book.html',
           controller: 'BookingController'
@@ -28,14 +26,31 @@ app.config(function($routeProvider, $locationProvider) {
               templateUrl: 'views/assigning.html',
               controller: 'DriverAssignController'
 
-          }).when('/Profile', {
-              templateUrl: 'views/Profile.html'
+          }).when('/Unauthorized', {
+              templateUrl: 'views/Unauthorized.html'
+            }).when('/nav-bar', {
+                templateUrl: 'views/nav-bar.html',
+                controller: 'NavController'
+
 
     }).when('/admin', {
         templateUrl: 'views/admin.html',
         controller: 'AdminController'
     });
 });
+
+// var authUser = $cookies.getObject('authUser');
+//         console.log(authUser);
+//         if (authUser != undefined) {
+//             var loggedInUser = authUser.currentUser.userInfo;
+//             console.log(loggedInUser);
+//           }
+// app.directive("navBar", function() {
+//     return {
+//       restrict:'E',
+//         templateURL:'nav-bar.html'
+//     };
+// });
 
 app.run(function($rootScope, $http, $location, $sessionStorage, $cookies) {
     if ($sessionStorage.tokenDetails) {
@@ -44,9 +59,9 @@ app.run(function($rootScope, $http, $location, $sessionStorage, $cookies) {
 
     $rootScope.$on('$locationChangeStart', function(event, next, current) {
         var publicPages = ['/', '/Login', '/Register','/Cancellation'];
-      var AdminPages = ['/','/admin','/assigning','/Login'];
-      var customerPages = ['/','/book','/cancellation','/Confirm','/Login'];
-      var DriverPages = ['/','/driver','/Login'];
+      var AdminPages = ['/admin','/assigning','/Login','/'];
+      var customerPages = ['/book','/cancellation','/Confirm','/Login','/Cancellation',,'/Register','/'];
+      var DriverPages = ['/driver','/Login','/'];
 
         var authUser = $cookies.getObject('authUser');
         if (authUser != undefined) {
@@ -55,7 +70,9 @@ app.run(function($rootScope, $http, $location, $sessionStorage, $cookies) {
 
         var restrictedPage = publicPages.indexOf($location.path()) === -1;
         if (restrictedPage && !$sessionStorage.tokenDetails && $location.path() != '') {
-            $location.path('/Login');
+          // alert("Log In First");
+            $location.path('/');
+
         }else{
           if (authUser != undefined) {
                        if(authUser.currentUser.userInfo.usertype==='Driver'){
@@ -65,7 +82,7 @@ app.run(function($rootScope, $http, $location, $sessionStorage, $cookies) {
                          }
 
                        }
-                       if(authUser.currentUser.userInfo.usertype==='User'){
+                       if(authUser.currentUser.userInfo.usertype==='Admin'){
                          var User = AdminPages.indexOf($location.path()) === -1;
                          if(User){
                            $location.path('/Unauthorized');

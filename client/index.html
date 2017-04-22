@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>AnyTimeCab</title>
 
 
 <style>
@@ -88,16 +88,19 @@ overflow:hidden;
  }
 
 </style>
-
+<!--
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCThItoZpHNB20PsHrGJ12KJyfKpT55iXs&callback=initMap">
+   </script> -->
+   <!-- <script async defer
+     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVFUmHe1c-OEAGIoYZgdDCnaUBfX1Ll84&callback=initMap">
+     </script> -->
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
 <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-
-
-
-    <link rel="stylesheet" href="./public/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./public/css/styles.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="./public/js/jquery-3.2.0.min.js"></script>
-    <script src="./public/js/bootstrap.min.js"></script>
     <script src="./public/js/angular.min.js"></script>
     <script src="./public/js/angular-route.min.js"></script>
     <script src="./public/js/angular-cookies.min.js"></script>
@@ -105,7 +108,7 @@ overflow:hidden;
     <script src="./app.js"></script>
     <script src="./controllers/HomeController.js"></script>
     <script src="./controllers/LoginController.js"></script>
-    <script src="./controllers/DriverLoginController.js"></script>
+    <script src="./controllers/NavController.js"></script>
     <script src="./controllers/RegisterController.js"></script>
     <script src="./controllers/AdminController.js"></script>
     <script src="./controllers/CancellationController.js"></script>
@@ -114,6 +117,9 @@ overflow:hidden;
     <script src="./controllers/ConfirmController.js"></script>
     <script src="./controllers/DriverAssignController.js"></script>
     <script src="./service/Authentication.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <!-- <script src="//code.angularjs.org/snapshot/angular.min.js"></script> -->
+
 </head>
 
 <body style="overflow:hidden">
@@ -126,8 +132,8 @@ overflow:hidden;
 
                     <div style="padding:10px">
                   <button type="button" class="btn btn-default Add-friend">
-<i class="fa fa-car" aria-hidden="true"></i>AnyTimeCab.com
-</button></div>
+  <i class="fa fa-car" aria-hidden="true"></i>AnyTimeCab.com
+  </button></div>
 
               </div>
               <br>
@@ -138,13 +144,25 @@ overflow:hidden;
 
                       <li class="activate"><a href="#/" style="color:white"><i class="glyphicon glyphicon-home" aria-hidden="true"></i>Home</a></li>
                       <li><a href="#/book" style="color:white"><i class="glyphicon glyphicon-tower"aria-hidden="true"></i>Book Cab</a></li>
-                      <li><a href="#/Login" style="color:white"><i class="fa fa-hand-o-right" aria-hidden="true"></i>LogIn</a></li>
+                      <!-- <li><a href="#/Login" style="color:white"><i class="fa fa-hand-o-right" aria-hidden="true"></i>LogIn</a></li> -->
                      <li><a href="#/Cancellation" style="color:white"><i class="fa fa-trophy" aria-hidden="true"></i>Cancellation</a></li>
-                     <!-- <li ng-show="nav.isLoggedIn && nav.userType='Driver'"><a href="#/driver" style="color:white"><i class="fa fa-trophy" aria-hidden="true"></i>Driver</a></li> -->
-                      <!-- <li><a href="#/admin" style="color:white"><i class="glyphicon glyphicon-tower"aria-hidden="true"></i>Admin</a></li> -->
+                     <!-- <li> <div ng-controller="AdminController as vm" > -->
+                       <!-- <a ng-if="vm.IsShow" ng-show="adminpg" href="#/admin">Admin</a></div> -->
+
+                         <!-- <div ng-controller="LoginController as vm" style="margin-left=-194%;margin-top:25%;"> -->
+                         <!-- <div ng-if="!vm.IsShow"> -->
+                         <!-- <a ng-show="loginButton" href="#/Login" style="color:white"><span class="glyphicon glyphicon-log-in"></span> LogIn</button> -->
+                         <!-- </div> -->
+                         <!-- <div  ng-if="vm.IsShow" style="margin-left:-20%;margin-top:-9%;" > -->
+               <!-- <a href="#/home" ng-click="vm.IsShow=!vm.IsShow" style="color:white"><span class="glyphicon glyphicon-log-out"></span> LogOut</a> -->
+  <!-- </li> -->
+
                   </ul>
               </div>
           </div>
+
+<nav-bar></nav-bar>
+
           <!-- <img src="img/123.gif" style="height: 150px;  width: 156px;margin-top: 15%;margin-left: 29%;"> -->
 
           <div class="col-md-9 col-sm-8 main-content">
@@ -153,8 +171,7 @@ overflow:hidden;
                  <div ng-view></div>
       </div></div>
   </div>
-  <img src="img/123.gif" style="height: 150px;  width: 160px;margin-top: -55%;margin-left: 20%;">
-  <img src="img/123.gif" style="height: 150px;  width: 160px;margin-top: -55%;margin-left: 35%;">
+
 
 
     <!-- <nav class="navbar navbar-default"> -->
