@@ -1,4 +1,4 @@
-angular.module('myApp').controller('AdminController', function($scope, $http,$rootScope,$location) {
+angular.module('myApp').controller('AdminController', function($scope, $http,$rootScope,$location,AuthenticationService) {
 
   var refreshConfirm= function () {
         $http.get('/cnfm/cnfm').success(function (response) {
@@ -9,6 +9,13 @@ angular.module('myApp').controller('AdminController', function($scope, $http,$ro
     };
 
     refreshConfirm();
+    $scope.LogoutUser = function() {
+        AuthenticationService.Logout(function(response) {
+            // if (response.data.success === true) {
+                $location.path('/Login');
+
+        });
+    };
 
 var refreshType = function () {
       $http.get('/crtype/crtype').success(function (response) {
@@ -207,6 +214,15 @@ $location.path('/assigning');
 
  }
 
+ $scope.RegisterAdmin = function() {
+
+ $scope.admin.UserType="Admin"
+
+     $http.post('/api/signup', $scope.admin).then(function(response) {
+         alert('Admin Registration Successful');
+
+     });
+ }
 
 
 })

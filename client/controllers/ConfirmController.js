@@ -1,4 +1,4 @@
-angular.module('myApp').controller('ConfirmController', function($scope, $http,$rootScope,$location) {
+angular.module('myApp').controller('ConfirmController', function($scope, $http,$rootScope,$location,AuthenticationService) {
   $scope.cnf=$rootScope.bookedCab;
   var refreshConfirm= function () {
         $http.get('/cnfm/cnfm').success(function (response) {
@@ -9,6 +9,14 @@ angular.module('myApp').controller('ConfirmController', function($scope, $http,$
     };
 
     refreshConfirm();
+
+    $scope.LogoutUser = function() {
+        AuthenticationService.Logout(function(response) {
+            // if (response.data.success === true) {
+                $location.path('/Login');
+
+        });
+    };
 
   $scope.ConfirmBook = function () {
     $scope.cndetail.Cid=$scope.cnf.id;

@@ -1,4 +1,4 @@
-angular.module('myApp').controller('HomeController', function($scope, $http) {
+angular.module('myApp').controller('HomeController', function($scope, $http, AuthenticationService, $location) {
 
   var refreshType = function () {
           $http.get('/crtype/crtype').success(function (response) {
@@ -10,11 +10,37 @@ angular.module('myApp').controller('HomeController', function($scope, $http) {
 
       refreshType();
 
+      $scope.LoginUser = function() {
+          AuthenticationService.Login($scope.User, function(response) {
+              if (response.data.success === true) {
+                if(response.data.userDetail.UserType=="Customer"){
+
+                    $location.path('/book');
+                }
+                if(response.data.userDetail.UserType=="Driver"){
+
+                    $location.path('/driver');
+                }
+                if(response.data.userDetail.UserType=="Admin"){
+
+                    $location.path('/admin');
+                }
+
+              }
+          });
+      };
+
       $scope.RegisterUser = function() {
-      $http.post('/api/signup', $scope.User).then(function(response) {
-          alert('User Registration Successful');
-      });
-  }
+        $scope.User.UserType="Customer"
+          $http.post('/api/signup', $scope.User).then(function(response) {
+              alert('User Registration Successful');
+          });
+      }
+  //     $scope.RegisterUser = function() {
+  //     $http.post('/api/signup', $scope.User).then(function(response) {
+  //         alert('User Registration Successful');
+  //     });
+  // }
 
       var i;
       var money;
@@ -78,10 +104,6 @@ angular.module('myApp').controller('HomeController', function($scope, $http) {
 
 
       }
-
-
-
-
 
 
 })

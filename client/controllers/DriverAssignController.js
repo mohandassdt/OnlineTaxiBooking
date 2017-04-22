@@ -1,5 +1,5 @@
 
-angular.module('myApp').controller('DriverAssignController', function($scope,$http,$rootScope,$location) {
+angular.module('myApp').controller('DriverAssignController', function($scope,$http,$rootScope,$location,AuthenticationService) {
 $scope.assignAj =$rootScope.asDriver;
 
 
@@ -12,6 +12,13 @@ var refreshDriver = function () {
   };
 
   refreshDriver();
+  $scope.LogoutUser = function() {
+      AuthenticationService.Logout(function(response) {
+          // if (response.data.success === true) {
+              $location.path('/Login');
+
+      });
+  };
 
   var i;
   var driverId = [];
