@@ -29,7 +29,7 @@ router.post('/drive', function(req, res) {
     var newDriver = new Driver();
     newDriver.Email = req.body.Email;
     newDriver.Did = req.body.Did;
-    newDriver.name = req.body.name;
+    newDriver.FirstName = req.body.FirstName;
     newDriver.age = req.body.age;
     newDriver.Car = req.body.Car;
     newDriver.carNo = req.body.carNo;

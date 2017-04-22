@@ -8,7 +8,10 @@ router.post('/signup', function(req, res) {
     newUser.FirstName = req.body.FirstName;
     newUser.LastName = req.body.LastName;
     newUser.MobileNumber = req.body.MobileNumber;
+    newUser.latitude = req.body.latitude;
+    newUser.longitude = req.body.longitude;
     newUser.Email = req.body.Email;
+    newUser.Did = req.body.Did;
     newUser.UserType = req.body.UserType;
     newUser.Password = newUser.generateHash(req.body.Password);
     newUser.save(function(err) {
@@ -54,6 +57,25 @@ router.post('/login', function(req, res) {
             console.log(token);
             console.log('Toke Created');
         }
+    });
+});
+router.put('/update/:id', function(req, res){
+   console.log("REACHED updation ");
+   console.log(req.body);
+   User.findOneAndUpdate({_id:req.params.id}, req.body, function (err, data) {
+     res.json(data);
+     console.log(data);
+   });
+})
+
+
+router.get('/getuser', function (req, res,next) {
+    console.log("REACHED GET FUNCTION ON SERVER");
+
+  User.find({}, function (err, docs) {
+         res.json(docs);
+         console.log(docs);
+
     });
 });
 
