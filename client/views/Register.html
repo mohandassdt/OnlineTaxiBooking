@@ -1,12 +1,70 @@
-<div id="Container" class="container" style="color:white">
-<!-- <p>Date: <input type="text" id="datepicker"></p>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-$( function() {
-  $( "#datepicker" ).datepicker();
-} );
+<!-- <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
+
+    <div class="container">
+    <div class='col-md-5'>
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker6'>
+                <input type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+
+</div> -->
+
+
+ <!-- <div class="row">
+                        <div class="col-md-2">
+                            <div class="input-group date" id="dp3" data-date="20-01-2015" data-datepicker-format="DD-MM-YYYY">
+                                <input class="form-control" type="text" size="16" value="20-01-2015" readonly="">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script> -->
+<!--
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js">
 </script> -->
-</div>
+<div class="container">
+<div class="row">
+   <div class='col-md-12'>
+      <div class='col-md-1'></div>
+    <div class='col-md-5' style="    margin-left: -13%;">
+<div id="myMap" style="width: 600px; height: 600px">
+</div></div>
+   <div class='col-md-5' style="    margin-left: 16%;">
+   <button class="btn btn-primary" ng-click="now()">Ride Now</button>
+   <button class="btn btn-primary" ng-click="ridelater()">Ride Later</button>
+   <div ng-show="ridenow">
+
+     Your Location : <input id="address" class="form-control" type="text" style="width:600px;"/><br/>
+     Destination: <input class="autocomplete form-control" id="ac1"  type="text" required></input>
+     Choose Cab Type :<select class="form-control" required>
+ <option class="form-control" ng-repeat="car in carlist" ng-value="car.carType">{{car.carType}}</option>
+            </select>
+Choose Trip Type:<p></p>
+                <input type="radio"  ng-model="tripType" ng-change="get()" Name="triptype"  value="Round Trip">Round Trip
+
+        <input type="radio"  ng-model="tripType" ng-change="get()" Name="triptype"  value="One Way">One Way
+   </div>
+   </div>
+      <div class='col-md-1'></div>
+      </div>
+      </div>
+      </div>
+
+<!--
+<div id="myMap"></div>
+<div id="address" ></div>
+<div  id="latitude" ></div>
+<div id="longitude" ></div> -->

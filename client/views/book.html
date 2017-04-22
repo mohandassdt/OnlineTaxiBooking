@@ -1,27 +1,20 @@
 
 <style>
-
-.well-searchbox {
-  min-height: 20px;
-  min-width: 400px;
-  padding: 19px;
-  position: absolute;
-  z-index: 80;
-  top: 80px;
-  /*right: 100px;*/
-  background: rgba(0, 0, 0, 0.6);
-  margin-bottom: 20px;
-  /*border: 1px solid #e3e3e3;*/
-  border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 23px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
 }
-
-.well-searchbox label {
-    color: #fff;
-}
+.button1 {border-radius: 2px;}
 </style>
-<div class="container">
+<!-- <div class="container">
   <button class="btn btn-info btn-block" style="width:85%"><h4>BOOK YOUR CAB</h4></button>
 <div style="margin-top:-45px">
   <div class="row">
@@ -97,7 +90,6 @@
   </div></div>
 
     <div class="col-md-6">
-<!--Windows-->
 <div class="panel panel-primary" ng-show="bokc.Type" style="margin-top: 83px;width:50%;">
       <div class="panel-heading">
         <h3 class="panel-title">Fare Deatls</h3>
@@ -120,75 +112,94 @@
 
   </div>
 
-</div
+</div> -->
+
+<div id="dvMap" style="width: 950px; height: 500px; display:none;">
+</div>
+
+<div id="dvPanel" style="width: 950px; height:500px;display:none;"></div>
+
+<!-- <div id="Container" class="container"> -->
+
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script> -->
+
+  <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCThItoZpHNB20PsHrGJ12KJyfKpT55iXs&callback=initMap">
+   </script> -->
+
+  <div class="container">
+    <a href="/" class="btn btn-success" ng-click="LogoutUser()" style="margin-top: 10px;margin-left: 49%;">LogOut</a>
+
+  <div class="row">
+     <div class='col-md-12'>
+      <div class='col-md-4' style="color:white">
+
+        <div>
+
+          <!-- <form id="mapCenterForm"> -->
+Lat:
+<p id="container" style="color:white"/></p>
+<p id="container1" style="color:white"></p>
+<!-- <button type="submit" value="Center map" style="width: 95px;height: 40px;"/> -->
+</form>
+
+
+          Your Location : <input id="address" class="form-control" type="text"/><br/>
+          Destination: <input class="autocomplete form-control" id="ac1" type="text" required></input>
+          Choose Cab Type :<select class="form-control" ng-change="GetRoute()" ng-model="bokc.Type" required>
+  <option  ng-repeat="tp in typelist" value="{{tp.CrTp}}">{{tp.CrTp}}</option>                 </select>
+<div style="display:none;">
+  lat : <input id="latitude" class="form-control" type="text"/><br/>
+  lat : <input id="longitude" class="form-control" type="text"/><br/>
+</div>
 
 
 
+                     <!-- <input type="radio"  ng-model="tripType" ng-change="get()" Name="triptype"  value="Round Trip">Round Trip
+
+             <input type="radio"  ng-model="tripType" ng-change="get()" Name="triptype"  value="One Way">One Way -->
+
+          <div ng-show="buttonDetails" style="padding:10px">   <button class="btn btn-primary" ng-click="clickBook()" style="padding:10px">Ride Now</button>
+             <button class="btn btn-primary" ng-click="clickBookLater()" style="padding:10px">Ride Later</button>
+           </div>
+        </div>
+<div ng-show="calDetails" style="margin-left:-38px;padding: 25px;">
+  <button class="button button1" style="width: 109px;"><i class="fa fa-rupee" style="font-size:48px;color:red"></i><br><p id="totalCabFare"></p></button>
+  <button class="button button1"><span class="glyphicon glyphicon-road" style="font-size:42px;color:red"></span><br><p id="totalDist"></p></button>
+  <button class="button button1"><span class="glyphicon glyphicon-time" style="font-size:42px;color:red"></span><br><p id="totalTime"></p></button>
+
+  <button class="btn btn-primary" ng-click="confirmlaterBookingNow()">Confirm</button>
+
+</div>
+
+<div ng-show="laterDetails">
+
+  Pickup Time : <input id="timeV" class="form-control" type="time"/><br/>
+  Pickup Date:<input type="Date" id="dateT" ng-blur="fareDetailsLater()"  class="form-control"><br/>
+  LandMark:<input type="text"  ng-model="bokc.Landmark1" class="form-control" placeholder="**required**">
+</div>
+<div ng-show="calDisDetails">
+  <button class="button button1" style="width: 109px;"><i class="fa fa-rupee" style="font-size:48px;color:red"></i><br><p id="totalCabFare1"></p></button>
+  <button class="button button1"><span class="glyphicon glyphicon-road" style="font-size:42px;color:red"></span><br><p id="totalDist1"></p></button>
+  <button class="button button1"><span class="glyphicon glyphicon-time" style="font-size:42px;color:red"></span><br><p id="totalTime1"></p></button>
+
+<button class="btn btn-primary" ng-click="confirmlaterBookingNow()">Confirm</button>
+
+
+</div>
 
 
 
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
-<script type="text/javascript">
+        </div>
 
-var source;
-var destination;
-var directionsDisplay;
-var distance;
-var directionsService = new google.maps.DirectionsService();
-google.maps.event.addDomListener(window, 'load', function () {
-    new google.maps.places.SearchBox(document.getElementById('txtSource'));
-    new google.maps.places.SearchBox(document.getElementById('txtDestination'));
-    directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true });
-});
-
-function GetRoute() {
-    var mumbai = new google.maps.LatLng(18.9750, 72.8258);
-    var mapOptions = {
-        zoom: 7,
-        center: mumbai
-    };
-    map = new google.maps.Map(document.getElementById('dvMap'), mapOptions);
-    directionsDisplay.setMap(map);
-    directionsDisplay.setPanel(document.getElementById('dvPanel'));
+        <div class='col-md-8'>
+          <div id="myMap" style="width: 550px; height: 570px;">
 
 
-    source = document.getElementById("txtSource").value;
-    destination = document.getElementById("txtDestination").value;
+           </div>
+           </div>
+  </div></div>
 
-    var request = {
-        origin: source,
-        destination: destination,
-        travelMode: google.maps.TravelMode.DRIVING
-    };
-    directionsService.route(request, function (response, status) {
-        if (status == google.maps.DirectionsStatus.OK) {
-            directionsDisplay.setDirections(response);
-        }
-    });
+        </div>
 
-    //*********DISTANCE AND DURATION**********************//
-    var service = new google.maps.DistanceMatrixService();
-    service.getDistanceMatrix({
-        origins: [source],
-        destinations: [destination],
-        travelMode: google.maps.TravelMode.DRIVING,
-        unitSystem: google.maps.UnitSystem.METRIC,
-        avoidHighways: false,
-        avoidTolls: false
-    }, function (response, status) {
-        if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
-             distance = response.rows[0].elements[0].distance.text;
-            var duration = response.rows[0].elements[0].duration.text;
-            var dvDistance = document.getElementById("dvDistance");
-          //  dvDistance.innerHTML = "";
-            dvDistance.innerHTML = "Distance: " + distance;
-            dvTime.innerHTML = "Duration:" + duration;
 
-        } else {
-            alert("Unable to find the distance via road.");
-        }
-    });
-}
-</script>
-
-</div></div>
+</div>

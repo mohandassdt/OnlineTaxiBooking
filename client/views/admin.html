@@ -147,10 +147,11 @@ label .fa {
   <label for="tab3"><i class="fa fa-bar-chart-o"></i><span>Assign Drivers</span></label>
 
   <input id="tab4" type="radio" name="tabs">
-  <label for="tab4"><i class="fa fa-folder-open-o"></i><span>Portfolio</span></label>
+  <label for="tab4"><i class="fa fa-folder-open-o"></i><span>Add Admin</span></label>
 
-  <input id="tab5" type="radio" name="tabs">
-  <label for="tab5"><i class="fa fa-envelope-o"></i><span>Contact</span></label>
+  <input type="radio" name="tabs">
+  <label for="tab5"><a href="/" class="btn btn-success" ng-click="LogoutUser()" style="margin-top: -7px;">LogOut</a>
+</label>
 
   <section id="content1" class="tab-content">
     <form class="form" name="myFormType" ng-submit="addType()">
@@ -247,7 +248,7 @@ label .fa {
     <tr>
 			<!-- <td><input type="file" onchange="previewFile()"></td> -->
 
-        <td style="padding:5px"><input type="text" class="form-control" ng-model="drive.name" minlength="1" required></td>
+        <td style="padding:5px"><input type="text" class="form-control" ng-model="drive.FirstName" minlength="1" required></td>
 				<td style="padding:5px"><input type="password" class="form-control" ng-model="drive.Password" minlength="1" required></td>
         <td style="padding:5px"><input type="text" class="form-control"  ng-model="drive.age" minlength="1" required></td>
         <td style="padding:5px"><input type="text" class="form-control" ng-model="drive.Mobile" minlength="1" required></td>
@@ -285,7 +286,7 @@ label .fa {
     <tr ng-repeat="drive in driverlist">
 			<!-- <td 	<img src="" height="200" alt="Image preview..."></td> -->
 <td>{{drive.Did}}</td>
-    <td>{{drive.name}}</td>
+    <td>{{drive.FirstName}}</td>
       <td>{{drive.age}}</td>
         <td>{{drive.Mobile}}</td>
           <td>{{drive.Email}}</td>
@@ -356,14 +357,69 @@ label .fa {
   </section>
 
   <section id="content4" class="tab-content">
-    <h3>Headline 4</h3>
-        <p>tab 4 Content</p>
+    <h3>Admin Registration</h3>
+
+
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label>First Name</label>
+				<div class="cols-sm-5">
+					<div class="input-group">
+						<input type="text" class="form-control" ng-model="admin.FirstName" name="name" id="name"  placeholder="Enter your Name"/>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="name" class="cols-sm-2 control-label">Last Name</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<input type="text" class="form-control" ng-model="admin.LastName" name="name" id="name"  placeholder="Enter your Name"/>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="email" class="cols-sm-2 control-label">Your Email</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<input type="text" class="form-control" ng-model="admin.Email" name="email" id="email"  placeholder="Enter your Email"/>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="mobile" class="cols-sm-2 control-label">Mobile No</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<input type="text" class="form-control" ng-model="admin.MobileNumber" name="username" id="mobile"  placeholder="Enter your Username"/>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="password" class="cols-sm-2 control-label">Password</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<input type="password" class="form-control" ng-model="admin.Password" name="password" id="password"  placeholder="Enter your Password"/>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+				<div class="cols-sm-10">
+					<div class="input-group">
+						<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group ">
+				<button href="#/Login" type="button" ng-click="RegisterAdmin()" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+			</div>
+		</form>
   </section>
 
-  <section id="content5" class="tab-content">
-    <h3>Headline 5</h3>
-        <p>Tab 5 Content.</p>
-  </section>
 </div>
 <!-- <script>
    function previewFile(){

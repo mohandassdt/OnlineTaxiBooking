@@ -1,0 +1,36 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3 col-sm-3 sidebar2" style="background-color: transparent;">
+            <div class="logo text-center">
+                <img src="img/lo1.jpg" class="img-responsive center-block" alt="Logo" style="height:159px;">
+
+                  <div style="padding:10px">
+                <button type="button" class="btn btn-default Add-friend">
+<i class="fa fa-car" aria-hidden="true"></i>AnyTimeCab.com
+</button></div>
+
+            </div>
+            <br>
+
+            <div class="left-navigation">
+
+                <ul class="list">
+
+                    <li class="activate"><a href="#/" style="color:white"><i class="glyphicon glyphicon-home" aria-hidden="true"></i>Home</a></li>
+                    <li><a href="#/book" style="color:white"><i class="glyphicon glyphicon-tower"aria-hidden="true"></i>Book Cab</a></li>
+                    <!-- <li><a href="#/Login" style="color:white"><i class="fa fa-hand-o-right" aria-hidden="true"></i>LogIn</a></li> -->
+                   <li><a href="#/Cancellation" style="color:white"><i class="fa fa-trophy" aria-hidden="true"></i>Cancellation</a></li>
+                   <li> <div ng-controller="AdminController as vm" >
+                     <a ng-if="vm.IsShow" ng-show="adminpg" href="#/admin">Admin</a></div>
+
+                       <div ng-controller="LoginController as vm" style="margin-left=-194%;margin-top:25%;">
+                       <div ng-if="!vm.IsShow">
+                       <a ng-show="loginButton" href="#/Login" style="color:white"><span class="glyphicon glyphicon-log-in"></span> LogIn</button>
+                       </div>
+                       <div  ng-if="vm.IsShow" style="margin-left:-20%;margin-top:-9%;" >
+             <a href="#/home" ng-click="vm.IsShow=!vm.IsShow" style="color:white"><span class="glyphicon glyphicon-log-out"></span> LogOut</a>
+</li>
+
+                </ul>
+            </div>
+        </div>

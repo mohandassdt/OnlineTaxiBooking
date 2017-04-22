@@ -330,7 +330,117 @@ body{
 
     <h1 style="color:#fff;text-align:center;margin-top: 74px;">AnyTimeCab.com</h1></div>
 
-   <img src="img/hm.gif" alt="Logo" style="height:215px; margin-top: 37%;  margin-left: -125%;">
+    <div class="container">
+    <div class="row">
+      <!-- <a class="btn btn-success" ng-click="LogoutUser()" style="margin-top: 20px">LogOut</a> -->
+
+        <div class="col-md-12">
+
+            <div class="wrap">
+                <p class="form-title">
+                    Sign In</p>
+                <form class="login">
+                <input type="text" placeholder="Email" ng-model="User.Email" />
+                <input type="password" ng-model="User.Password" placeholder="Password" />
+                <input type="submit" ng-click="LoginUser()" value="Sign In" class="btn btn-success btn-sm" />
+                <input type="submit" data-toggle="modal" data-target="#myModalRegister" value="Register" class="btn btn-info btn-sm" />
+                    </div>
+                </div>
+
+                </form>
+            </div>
+            <div class="modal fade" id="myModalRegister" role="dialog">
+    <div class="modal-dialog" style="margin-left: 40%; width: 25%;padding:0px">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Register</h4>
+      </div>
+      <div class="modal-body"style="padding:0px">
+        <div class="row main">
+
+          <div class="main-login main-center">
+            <form class="form-horizontal" method="post" action="#">
+
+              <div class="form-group">
+                <label for="name" class="cols-sm-2 control-label">First Name</label>
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" ng-model="User.FirstName" name="name" id="name"  placeholder="Enter your Name"/>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="name" class="cols-sm-2 control-label">Last Name</label>
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" ng-model="User.LastName" name="name" id="name"  placeholder="Enter your Name"/>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="cols-sm-2 control-label">Your Email</label>
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" ng-model="User.Email" name="email" id="email"  placeholder="Enter your Email"/>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="mobile" class="cols-sm-2 control-label">Mobile No</label>
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
+                    <input type="text" class="form-control" ng-model="User.MobileNumber" name="username" id="mobile"  placeholder="Enter your Username"/>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="password" class="cols-sm-2 control-label">Password</label>
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                    <input type="password" class="form-control" ng-model="User.Password" name="password" id="password"  placeholder="Enter your Password"/>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>
+                <div class="cols-sm-10">
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                    <input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group ">
+                <button href="#/Login" type="button" ng-click="RegisterUser()" class="btn btn-primary btn-lg btn-block login-button">Register</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+    </div>
+
+        </div></div>
+
+    <img src="img/123.gif" style="height: 150px;  width: 160px;margin-top: -32%;margin-left: 20%;position: fixed;">
+    <img src="img/123.gif" style="height: 150px;  width: 160px;margin-top: -32%;margin-left: 67%;position: fixed;">
+   <img src="img/hm.gif" alt="Logo" style="height:215px; margin-top: 24%;  margin-left: -39%;">
 <button class="button button5" ng-click="toggle()" style="background-color:royalblue;border-color: transparent;">Fare Details</button>
 <!-- <div class="modal fade" id="myModalFare" role="dialog"> -->
 
