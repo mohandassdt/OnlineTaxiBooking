@@ -5,11 +5,28 @@ var socket=io();
 
 
 
+var loggedInUser;
+  var authUser = $cookies.getObject('authUser');
+        console.log(authUser);
+        if (authUser != undefined) {
+            loggedInUser = authUser.currentUser.userInfo;
+            console.log(loggedInUser);
+          }
 
 
-// socket.on('newCustomerMessage',function(data){
-//   document.getElementById("customerContainer").innerHTML=data.message
-// })
+socket.on('newCustomerMessage',function(data){
+  console.log(data);
+  document.getElementById("customerContainer").innerHTML=data.message.name
+sendtoCustomer();
+
+})
+
+var sendtoCustomer = function () {
+  socket.emit('driverMessage',{
+     driverDetails:loggedInUser
+   })
+}
+
 
 // $scope.sendmessage=function(){
 //   socket.emit('myMessage',{
@@ -27,13 +44,6 @@ $scope.LogoutUser = function() {
     });
 };
 
-var loggedInUser;
-  var authUser = $cookies.getObject('authUser');
-        console.log(authUser);
-        if (authUser != undefined) {
-            loggedInUser = authUser.currentUser.userInfo;
-            console.log(loggedInUser);
-          }
   // console.log(authUser.currentUser.userInfo.email);
   // console.log(authUser.currentUser.userInfo.fname);
   //
@@ -154,7 +164,7 @@ var k,name,carno,carname,email,contactno,sockid;
                       email=$scope.driverlist[k].Email;
     // alert(sockid);
                       socket.emit('driverdetails',{
-                      lat:latitude,
+                     lat:latitude,
                       long:longitude,
                       Dname:name,
                       cab:cabType,
@@ -165,6 +175,18 @@ var k,name,carno,carname,email,contactno,sockid;
                       // socketid:sockid
                       // console.log(cab,lat,Dname,socketid);
                       });
+                      // socket.emit('drdetails',{
+                      // lat:latitude,
+                      // long:longitude,
+                      // Dname:name,
+                      // cab:cabType,
+                      // No:contactno,
+                      // cno:carno,
+                      // cname:carname,
+                      // mail:email
+                      // // socketid:sockid
+                      // // console.log(cab,lat,Dname,socketid);
+                      // });
                       }
                       }    });
 

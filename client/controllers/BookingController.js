@@ -8,7 +8,9 @@ $scope.LogoutUser = function() {
     });
 };
 
-// var socket=io();
+
+
+
 
 var refreshType = function () {
       $http.get('/crtype/crtype').success(function (response) {
@@ -203,8 +205,50 @@ alert(lat);
 $scope.calDetails=false;
 $scope.buttonDetails=true;
 
+var latt,longt;
+
+    var l;
+    var retdata=[];
+  var details=[];
+      var socket=io();
+
+      socket.on('driverMessage',function(data){
+        console.log(data);
+        document.getElementById("customerContainer").innerHTML=data.driverMessage.Name
+      })
+
+            socket.on('dd',function(data){
+              // details[data.id]=new google.map.Marker({
+              //   position:data.location,
+              //   map:map,
+              //   icon:"https://cdn1.iconfinder.com/data/icons/travel-and-holiday-2/130/_Taxi-128.png"
+              // });
+              // })
+
+
+
+              details.push(data.details);
+              console.log(details.length);
+              for(l=0;l<details.length;l++)
+              {
+
+              console.log(details[l].lattitude);
+              console.log(details[l].Longitude);
+                      marker = new google.maps.Marker({
+                                        position: new google.maps.LatLng(details[l].lattitude,details[l].Longitude),
+                                        draggable: true,
+                                        map: map,
+                                        icon: 'https://cdn1.iconfinder.com/data/icons/travel-and-holiday-2/130/_Taxi-128.png',
+                                       title: 'Driver'
+                                    })
+              }
+
+            })
       var clicked;
     $scope.clickBook = function () {
+
+
+
       var geocoder = geocoder = new google.maps.Geocoder();
               geocoder.geocode({ 'latLng': latlng }, function (results, status) {
                   if (status == google.maps.GeocoderStatus.OK) {
@@ -229,7 +273,7 @@ $scope.calDetails=true;
 $scope.buttonDetails=false;
 
 
-                  for(i=0;i<=$scope.typelist.length;i++){
+                  for(i=0;i<$scope.typelist.length;i++){
                         console.log($scope.typelist);
                         // console.log($scope.typelist[i].peakhr1);
                           console.log($scope.bokc.PickTime);
@@ -278,48 +322,99 @@ $scope.buttonDetails=false;
 
 
       $scope.bokc.amount=totalMoney;
+
+
+
+
         // $scope.bokc.DesinationLoc
         // $scope.bokc.Pickdate=document.getElementById("dateT").value;
         // $scope.bokc.PickTime=document.getElementById("timeT").value;
-        clicked='BK' + Math.random().toString(10).substr(2,5);
-      $scope.bokc.id=clicked;
-
-        console.log($scope.bokc);
-        $http.post('/bkc/bkc', $scope.bokc).success(function (response) {
-            console.log(response);
-            console.log("Book CREATE IS SUCCESSFUL");
-            refreshBook();
-        });
+      //   clicked='BK' + Math.random().toString(10).substr(2,5);
+      // $scope.bokc.id=clicked;
+      //
+      //   console.log($scope.bokc);
+      //   $http.post('/bkc/bkc', $scope.bokc).success(function (response) {
+      //       console.log(response);
+      //       console.log("Book CREATE IS SUCCESSFUL");
+      //       refreshBook();
+      //   });
 
     }
-    // var goldStar = {
-    //          path: 'img/carMarker.png',
-    //          fillColor: 'yellow',
-    //      fillOpacity: 0.8,
-    //      scale: 1,
-    //      strokeColor: 'gold',
-    //      strokeWeight: 14
-    //
-    //        };
-var latt,longt;
-    var socket=io();
-    socket.on('driverdetails',function(data){
-      document.getElementById("container1").innerHTML=data.latitude;
-      document.getElementById("container").innerHTML=data.Longitude;
 
-latt=data.latitude;
-longt=data.Longitude;
+// socket.on('driverremoved',function(data){
+//   if(details[data.id]!=undefined)
+//   {
+//     details[data.id].setMap(null);
+//   }
+// });
 
+// var h;
+// var newdetails=[];
+// socket.on('driver removed',function(data){
+//
+//   newdetails.push(data1.details);
+//   console.log(newdetails.length);
+//   for(h=0;h<newdetails.length;h++)
+//   {
+//
+//   console.log(newdetails[h].latitude);
+//   console.log(newdetails[h].Longitude);
+//           marker = new google.maps.Marker({
+//                             position: new google.maps.LatLng(newdetails[h].latitude,newdetails[h].Longitude),
+//                             draggable: true,
+//                             map: map,
+//                             icon: 'https://cdn1.iconfinder.com/data/icons/travel-and-holiday-2/130/_Taxi-128.png',
+//                            title: 'Driver'
+//                         })
+//   }
+// })
 
-      marker = new google.maps.Marker({
-                          position: new google.maps.LatLng(latt,longt),
-                          map: map,
-                            icon: 'https://cdn1.iconfinder.com/data/icons/travel-and-holiday-2/130/_Taxi-128.png',
-                            latti:data.message[1],
-                         title: 'Driver'
-                      })
-
-    })
+//     socket.on('dd',function(data){
+//  // retdata.push(data.details);
+// //       console.log(retdata);
+// //       alert(retdata.length);
+//       // var obj =data.details;
+//       // alert(obj.length);
+//       // var arr = Object.keys(obj).map(function (key) { return obj[key]; });
+//       // console.log(arr);
+//       // alert(arr);
+//       // alert(arr.length);
+//
+//       // document.getElementById("container1").innerHTML=data.details;
+// //       document.getElementById("container").innerHTML=data.Longitude;
+// //
+// // latt=data.latitude;
+// // longt=data.Longitude;
+// //
+// // retdata=data.details;
+// // console.log(retdata);
+// console.log(data.details);
+// var obj=data.details;
+// alert(obj.Name);
+// console.log(obj);
+// // alert(obj.length);
+// retdata.push(obj);
+// alert(retdata.length);
+// // $scope.d=data.details;
+// // retdata.push(data.details);
+// // alert(retdata.length);
+// // console.log(retdata);
+// // var arr = $.map(data.details, function(el) { return el; })
+// //
+// // console.log(arr)
+// for(l=0;l<retdata.length;l++)
+// {
+//
+// console.log(retdata[i].Name);
+// console.log(retdata[i].Longitude);
+//         marker = new google.maps.Marker({
+//                           position: new google.maps.LatLng(retdata[i].latitude,retdata[i].Longitude),
+//                           map: map,
+//                             icon: 'https://cdn1.iconfinder.com/data/icons/travel-and-holiday-2/130/_Taxi-128.png',
+//                          title: 'Driver'
+//                       })
+// }
+//     })
 
 var driverslist=[];
 // socket.on('close',function(data)
@@ -337,6 +432,8 @@ var driverslist=[];
 
 refreshUserGet();
 
+
+
 var loggedInUser;
   var authUser = $cookies.getObject('authUser');
         console.log(authUser);
@@ -344,32 +441,57 @@ var loggedInUser;
             loggedInUser = authUser.currentUser.userInfo;
             console.log(loggedInUser);
           }
+
+initCustomer();
+  function initCustomer() {
+          socket.emit('user',{
+            info:loggedInUser
+          })
+        }
 var j;
 var customerDetails;
 
 var unique=[];
-    $scope.confirmlaterBookingNow=function(){
+    $scope.confirmBookingNow=function(){
 
 $scope.bokc.CustomerName=authUser.currentUser.userInfo.fname;
 $scope.bokc.CustomerNumber=authUser.currentUser.userInfo.mobile;
 $scope.bokc.CustomerMail=authUser.currentUser.userInfo.email;
-      for(j=0;j<$scope.Userlist.length;j++){
-        if($scope.Userlist[j].UserType=='Driver'){
 
-          var lat1=parseFloat(lat).toFixed(4);
-          var long2=parseFloat(long).toFixed(4);
+socket.emit('customerdetails',{
+latitude:lat,
+longitude:long,
+name:authUser.currentUser.userInfo.fname,
+cabType:$scope.bokc.Type,
+No:authUser.currentUser.userInfo.mobile,
+Amount:$scope.bokc.amount,
+source:$scope.bokc.sourceLoc,
+Destination:$scope.bokc.DesinationLoc,
+mail:authUser.currentUser.userInfo.email
+// socketid:sockid
+// console.log(cab,lat,Dname,socketid);
+});
 
-          // alert(long);
-          if($scope.Userlist[j].latitude==lat1 &&$scope.Userlist[j].longitude==long2){
-          if(unique.indexOf($scope.Userlist[j].Email) === -1){
-    unique.push($scope.Userlist[j].Email);
-    console.log(unique);
 
-       customerDetails=$scope.bokc;
-        }
-}}}
+//       for(j=0;j<$scope.Userlist.length;j++){
+//         if($scope.Userlist[j].UserType=='Driver'){
+//
+//           var lat1=parseFloat(lat).toFixed(4);
+//           var long2=parseFloat(long).toFixed(4);
+//
+//           // alert(long);
+//           if($scope.Userlist[j].latitude==lat1 &&$scope.Userlist[j].longitude==long2){
+//           if(unique.indexOf($scope.Userlist[j].Email) === -1){
+//     unique.push($scope.Userlist[j].Email);
+//     console.log(unique);
+//
+//        customerDetails=$scope.bokc;
+//         }
+// }}}
 
-
+// socket.on('driver removed',function(data) {
+// console.log(data);
+// })
 };
 
 
@@ -385,15 +507,6 @@ $scope.bokc.CustomerMail=authUser.currentUser.userInfo.email;
     }
 
     $scope.fareDetailsLater = function () {
-      var geocoder = geocoder = new google.maps.Geocoder();
-              geocoder.geocode({ 'latLng': latlng }, function (results, status) {
-                  if (status == google.maps.GeocoderStatus.OK) {
-                      if (results[1]) {
-                          console.log("Location: " + results[1].formatted_address);
-                      }
-                  }
-              });
-
       $scope.bokc.sourceLoc=document.getElementById("address").value;
       $scope.bokc.DesinationLoc=document.getElementById("ac1").value;
       console.log($scope.bokc.sourceLoc);
@@ -405,7 +518,7 @@ $scope.bokc.CustomerMail=authUser.currentUser.userInfo.email;
     document.getElementById("totalTime1").innerHTML=duration;
     $scope.laterDetails=true;
     $scope.buttonDetails=false;
-                  for(i=0;i<=$scope.typelist.length;i++){
+                  for(i=0;i<$scope.typelist.length;i++){
                         console.log($scope.typelist);
                         // console.log($scope.typelist[i].peakhr1);
                           console.log($scope.bokc.PickTime);
@@ -458,7 +571,6 @@ $scope.bokc.CustomerMail=authUser.currentUser.userInfo.email;
     $scope.bokc.id=clicked;
     $scope.bokc.amount=totalMoney;
 
-
               console.log($scope.bokc);
               $http.post('/bkc/bkc', $scope.bokc).success(function (response) {
                   console.log(response);
@@ -474,4 +586,4 @@ $scope.bokc.CustomerMail=authUser.currentUser.userInfo.email;
 
 
 
-})
+});
