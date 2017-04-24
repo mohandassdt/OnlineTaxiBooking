@@ -13,7 +13,8 @@ var billRoute = require('./server/routes/billing-crud.js');
 var server=require('http').Server(app);
 var io=require('socket.io').listen(server);
 var drivers=[];
-var i;
+var customer=[];
+var i,j;
 
 app.use(bodyParser.json());
 app.use('/', express.static(path.join(__dirname, './client')));
@@ -39,78 +40,122 @@ db.on('error', function(err) {
 //     });
 // });
 
+
 io.on('connection',function(socket){
 
   console.log("socket connected")
   // console.log(socket.id);
   // console.log("socket id send to driver ctrller");
-    console.log(socket.id);})
-  // socket.emit('ID',{
-  //
-  //   sid:socket.id
-  // })
-  // socket.on('myMessage',function(data){
-  //   console.log(data.message);
-  //   socket.broadcast.emit('newMessage',{
-  //     message:data.message
-  //   })
-  // })
-//   socket.on('disconnect',function(){
-//     console.log("disconnect");
-//
-//     console.log(socket.id);
-//     socket.broadcast.emit('close',function()  {
-//     for(i=0;i<drivers.length;i++)
-//     {
-//     if(drivers[i].socketid=socket.id){
-//       console.log(drivers[i]);
-//       delete drivers[i];}
-//     }
-//
-//     console(drivers);
-//     dd:drivers
-//   })
+    console.log(socket.id);
+socket.on('user',function(data){
+  console.log("reached customer details");
+console.log(data.info.email);
 
-  socket.on('driverdetails',function(data)
-{
-  console.log(data);
-console.log(socket.id);
-drivers[socket.id]={
-  latitude:data.lat,
-  Longitude:data.long,
-  Name:data.Dname,
-  type:data.cab,
-  pnone:data.No,
-  carno:data.cno,
-  carname:data.cname,
-Email:data.mail
-};
-console.log("driver added");
-// drivers.push(data);
-console.log(drivers);
-socket.broadcast.emit('dd',drivers[socket.id]);
+  customer[socket.id] ={
+Name:data.info.fname,
+email:data.info.email,
+phone:data.info.mobile,
+idNo:socket.id
+
+  }
 })
+
+
+
+
+    socket.on('driverdetails',function(data)
+    {
+    console.log(data);
+    console.log(socket.id);
+    drivers[socket.id]={
+  lattitude:data.lat,
+  Longitude:data.long,
+    Name:data.Dname,
+    type:data.cab,
+    pnone:data.No,
+    carno:data.cno,
+    carname:data.cname,
+    Email:data.mail,
+    id:socket.id
+  };
+    console.log("driver added");
+  console.log(drivers);
+    socket.broadcast.emit('dd',{
+      details:drivers[socket.id]
+    });
+    // console.log(details);
+    // console.log("drivers details send");
+
+  })
+
+socket.on('driverMessage',function(data){
+
+driverMessage:data.driverDetails
+
+});
+
+socket.on('customerdetails',function(data){
+  console.log(data);
+console.log(data.cabType);
+
+// for(t in customer){
+//   console.log(customer[t]);
+//   console.log(customer[t].email);
+//   if(data.mail==customer[t].email){
+//     console.log("customer confirmed");
 //
-//   // if(drivers.indexOf(data) === -1){
-//   //     drivers.sh(drivers);
-//   // drivers.push(data);
-//   console.log("drivers add saved");
+//   }}
+    for(s in drivers){
+
+  if(data.cabType==drivers[s].type){
+
+    console.log(drivers[s].id);
+    // console.log(socket.id);
+    console.log("reached target in server inner");
+// socket.on('ack',f)
+    socket.to(drivers[s].id).emit('newCustomerMessage', {
+      message:data
+
+      });
+      socket.to(customer[t].idNo).emit('newDriverMessage', {
+        msg:drivers[s]
+    });
+console.log("cutomer id reached");
+console.log(customer[t].idNo)
+
+
+
+    console.log("details sent ot driver");
+
+  }
+    }
+
+//
+//   }
+//
+// }
+
+
+
+})
+
+
+
+socket.on('disconnect',function(){
+  console.log("socket disconnected");
+  socket.broadcast.emit("driverremoved",drivers[socket.id]);
+  console.log(socket.id);
+  delete drivers[socket.id];
+  console.log(drivers);
+})
+// socket.broadcast.emit('details',{
+//   newdetails:drivers[socket.id]
+//   // console.log(drivers);
 // })
+// console.log(drivers);
+  })
 
 
-
-
-
-  //
-  // socket.on('customerBookMessage',function(data){
-  //   console.log(data.customerdata);
-  //   socket.broadcast.emit('newCustomerMessage',{
-  //     message:data.customerdata
-  //   })
-  // })
-
-// })
-// app.use('/apidr', DriverRoute);
 app.use('/api', UserRoute);
 app.use('/drive', DriverRoute);
 app.use('/crtype', cartypeRoute);
